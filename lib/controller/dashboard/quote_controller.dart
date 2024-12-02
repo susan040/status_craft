@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:status_generator/models/quote.dart';
+import 'package:status_craft/models/quote.dart';
 import 'dart:convert';
 
 class QuoteController extends GetxController {

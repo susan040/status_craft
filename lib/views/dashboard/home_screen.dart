@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
-import 'package:status_generator/utils/image_path.dart';
-import 'package:status_generator/widgets/custom/custom_textfield.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
+import 'package:status_craft/utils/image_path.dart';
+import 'package:status_craft/widgets/custom/custom_textfield.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = "/home-screen";
@@ -14,13 +14,20 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.extraWhite,
       appBar: AppBar(
-          backgroundColor: AppColors.extraWhite,
-          centerTitle: false,
-          title: const Image(
+        centerTitle: false,
+        title: const Image(
+          image: AssetImage(ImagePath.mainLogo),
+          // height: 50,
+          // width: 50,
+        ),
+        actions: [
+          Image(
             image: AssetImage(ImagePath.mainLogo),
-            height: 50,
-            width: 50,
-          )),
+            height: 20,
+            width: 20,
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding:

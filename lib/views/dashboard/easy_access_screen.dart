@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
-import 'package:status_generator/utils/image_path.dart';
-import 'package:status_generator/views/dash_screen.dart';
-import 'package:status_generator/widgets/custom/elevated_button.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
+import 'package:status_craft/utils/image_path.dart';
+import 'package:status_craft/views/dash_screen.dart';
+import 'package:status_craft/widgets/custom/elevated_button.dart';
 
 class EasyToAccessScreen extends StatelessWidget {
   static String routeName = "/easy-access-screen";

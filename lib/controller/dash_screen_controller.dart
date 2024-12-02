@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:status_generator/views/dashboard/prompt_screen.dart';
-import 'package:status_generator/views/dashboard/setting_screen.dart';
+import 'package:status_craft/views/dashboard/prompt_screen.dart';
+import 'package:status_craft/views/dashboard/setting_screen.dart';
 
 class DashScreenController extends GetxController {
   final dashKey = GlobalKey<ScaffoldState>();

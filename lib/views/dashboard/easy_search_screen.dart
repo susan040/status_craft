@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
-import 'package:status_generator/utils/image_path.dart';
-import 'package:status_generator/views/dashboard/easy_access_screen.dart';
-import 'package:status_generator/widgets/custom/elevated_button.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
+import 'package:status_craft/utils/image_path.dart';
+import 'package:status_craft/views/dashboard/easy_access_screen.dart';
+import 'package:status_craft/widgets/custom/elevated_button.dart';
 
 class EasyToSearchScreen extends StatelessWidget {
   static String routeName = "/easy-search-screen";

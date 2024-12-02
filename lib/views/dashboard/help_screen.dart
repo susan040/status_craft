@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({super.key});
@@ -13,7 +13,8 @@ class HelpPage extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Help", style: CustomTextStyles.f16W600()),
+        title: Text("Help",
+            style: CustomTextStyles.f16W600(color: AppColors.textColor)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

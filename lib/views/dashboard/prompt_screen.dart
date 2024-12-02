@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:status_generator/controller/dashboard/quote_controller.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
-import 'package:status_generator/utils/image_path.dart';
-import 'package:status_generator/views/dashboard/about_us_screen.dart';
-import 'package:status_generator/views/dashboard/category_screen.dart';
-import 'package:status_generator/views/dashboard/help_screen.dart';
-import 'package:status_generator/views/dashboard/sub_category_screen.dart';
-import 'package:status_generator/widgets/category_widget.dart';
+import 'package:status_craft/controller/dashboard/quote_controller.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
+import 'package:status_craft/utils/image_path.dart';
+import 'package:status_craft/views/dashboard/about_us_screen.dart';
+import 'package:status_craft/views/dashboard/category_screen.dart';
+import 'package:status_craft/views/dashboard/help_screen.dart';
+import 'package:status_craft/views/dashboard/sub_category_screen.dart';
+import 'package:status_craft/widgets/category_widget.dart';
 
 class PromptScreen extends StatelessWidget {
   static String routeName = "/prompt-screen";
@@ -22,9 +22,20 @@ class PromptScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         appBar: AppBar(
           backgroundColor: AppColors.extraWhite,
+          iconTheme: IconThemeData(color: AppColors.textColor),
           centerTitle: false,
-          elevation: 2,
-          title: Text("Daily Status", style: CustomTextStyles.f16W600()),
+          elevation: 1.5,
+          leading: IconButton(
+            icon: Icon(Icons.menu,
+                color: AppColors.textColor), // Custom menu icon
+            onPressed: () {
+              Scaffold.of(context).openDrawer(); // Opens the drawer
+            },
+          ),
+          title: Text(
+            "Daily Status",
+            style: CustomTextStyles.f16W600(color: AppColors.textColor),
+          ),
         ),
         drawer: Drawer(
           backgroundColor: AppColors.extraWhite,

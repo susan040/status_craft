@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:status_craft/controller/dashboard/quote_controller.dart';
 import 'package:status_craft/models/quote.dart';
 import 'package:status_craft/utils/colors.dart';

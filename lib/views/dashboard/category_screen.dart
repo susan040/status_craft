@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
-import 'package:status_generator/views/dashboard/sub_category_screen.dart';
-import 'package:status_generator/widgets/category_widget.dart';
-import 'package:status_generator/widgets/custom/sub_category_widget.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
+import 'package:status_craft/views/dashboard/sub_category_screen.dart';
+import 'package:status_craft/widgets/category_widget.dart';
+import 'package:status_craft/widgets/custom/sub_category_widget.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -17,7 +17,7 @@ class CategoryScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Category", style: CustomTextStyles.f16W600()),
+        title: Text("Category", style: CustomTextStyles.f16W600(color: AppColors.textColor)),
       ),
       body: SingleChildScrollView(
         child: Column(
