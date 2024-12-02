@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
 
 class DataRowValue extends StatelessWidget {
   final String title1;

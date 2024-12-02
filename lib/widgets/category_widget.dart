@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:status_generator/utils/colors.dart';
-import 'package:status_generator/utils/custom_text_style.dart';
-import 'package:status_generator/widgets/category_bottom_sheet.dart';
+import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_text_style.dart';
+import 'package:status_craft/widgets/category_bottom_sheet.dart';
 
 class PositiveStatusScreen extends StatelessWidget {
   const PositiveStatusScreen({super.key});
