@@ -11,340 +11,119 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = [
+      {
+        "title": "Positive",
+        "image": "assets/common/positive.jpg",
+        "screen": const PositiveStatusScreen()
+      },
+      {
+        "title": "Emotional",
+        "image": "assets/common/emotional.jpg",
+        "screen": const EmotionalStatusScreen()
+      },
+      {
+        "title": "Celebration",
+        "image": "assets/common/celebration.jpg",
+        "screen": const CelebrationStatusScreen()
+      },
+      {
+        "title": "Romantic",
+        "image": "assets/common/romantic.png",
+        "screen": const RomanticStatusScreen()
+      },
+      {
+        "title": "Inspiration",
+        "image": "assets/common/inspiration.jpeg",
+        "screen": const InspirationStatusScreen()
+      },
+      {
+        "title": "Education",
+        "image": "assets/common/education.jpg",
+        "screen": const EducationStatusScreen()
+      },
+      {
+        "title": "Cool",
+        "image": "assets/common/cool.jpg",
+        "screen": const CoolStatusWidget()
+      },
+      {
+        "title": "Passion",
+        "image": "assets/common/passion.jpg",
+        "screen": const PassionStatusWidget()
+      },
+      {
+        "title": "Governmental",
+        "image": "assets/common/governmental.jpg",
+        "screen": const GovernmentalStatusWidget()
+      },
+    ];
+
     return Scaffold(
       backgroundColor: AppColors.extraWhite,
       appBar: AppBar(
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Category", style: CustomTextStyles.f16W600(color: AppColors.textColor)),
+        leading: InkWell(
+          onTap: () => Get.back(),
+          child: Icon(Icons.arrow_back, color: AppColors.textColor),
+        ),
+        title: Text("Category",
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 14, top: 16),
-              child: Row(children: [
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const PositiveStatusScreen());
-                  },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            // Ensuring GridView has a fixed height
+            height: MediaQuery.of(context).size.height,
+            child: GridView.builder(
+              itemCount: categories.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 14,
+                mainAxisSpacing: 16,
+                childAspectRatio: 1.2,
+              ),
+              itemBuilder: (context, index) {
+                final category = categories[index];
+                return InkWell(
+                  onTap: () => Get.to(() => category["screen"] as Widget),
                   child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/common/positive.jpg"))),
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(category["image"] as String),
+                      ),
+                    ),
                     child: Stack(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
+                        Positioned.fill(
+                          // Ensure proper use inside Stack
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.textColor.withOpacity(0.33),
+                            ),
                           ),
                         ),
                         Center(
                           child: Text(
-                            "Positive",
+                            category["title"] as String,
                             style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
+                              color: AppColors.extraWhite,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(width: 14),
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const EmotionalStatusScreen());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/common/emotional.jpg"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Emotional",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 14, top: 16),
-              child: Row(children: [
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const CelebrationStatusScreen());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image:
-                                AssetImage("assets/common/celebration.jpg"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Celebration",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 14),
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const RomanticStatusScreen());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/common/romantic.png"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Romantic",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 16, right: 14, top: 16, bottom: 16),
-              child: Row(children: [
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const InspirationStatusScreen());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image:
-                                AssetImage("assets/common/inspiration.jpeg"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Inspiration",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 14),
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const EducationStatusScreen());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/common/education.jpg"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Education",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 14),
-              child: Row(children: [
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const CoolStatusWidget());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/common/cool.jpg"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Cool",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 14),
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const PassionStatusWidget());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/common/passion.jpg"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Passion",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 16, right: 14, top: 16, bottom: 25),
-              child: Row(children: [
-                InkWell(
-                  onTap: () {
-                    Get.to(() => const GovernmentalStatusWidget());
-                  },
-                  child: Container(
-                    height: 150,
-                    width: Get.width / 2.26,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image:
-                                AssetImage("assets/common/governmental.jpg"))),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.textColor.withOpacity(
-                                0.33), // Adjust the opacity to make the image darker
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            "Governmental",
-                            style: CustomTextStyles.f14W700(
-                                color: AppColors.extraWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ]),
-            )
-          ],
+          ),
         ),
       ),
     );

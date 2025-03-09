@@ -6,7 +6,7 @@ import 'package:status_craft/controller/dashboard/quote_controller.dart';
 import 'package:status_craft/models/quote.dart';
 import 'package:status_craft/utils/colors.dart';
 import 'package:status_craft/utils/custom_text_style.dart';
-
+import 'package:shimmer/shimmer.dart';
 
 class QuotesDisplayPage extends StatelessWidget {
   final String category;
@@ -39,7 +39,8 @@ class QuotesDisplayPage extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        title: Text('$category Quotes', style: CustomTextStyles.f16W600()),
+        title: Text('${category.capitalizeFirst!} Quotes',
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.black),
@@ -51,7 +52,7 @@ class QuotesDisplayPage extends StatelessWidget {
         padding: const EdgeInsets.only(right: 16, left: 16, top: 20),
         child: Obx(() {
           if (controller.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
+            return _buildShimmer(); // Shimmer effect for loading quotes
           } else {
             return ListView.builder(
               itemCount: controller.quotes.length,
@@ -63,6 +64,89 @@ class QuotesDisplayPage extends StatelessWidget {
           }
         }),
       ),
+    );
+  }
+
+  // Shimmer effect widget for loading state
+  Widget _buildShimmer() {
+    return ListView.builder(
+      itemCount:
+          5, // Adjust based on the number of items you want to show as loading
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            height: MediaQuery.of(context).size.height / 2.7,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: AppColors.extraWhite,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                      color: AppColors.unselectedGrey,
+                      blurRadius: 2,
+                      spreadRadius: 2)
+                ]),
+            child: Column(
+              children: [
+                Container(
+                  height: 215,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Container(
+                          color: Colors.white,
+                          height: 14,
+                          width: double.infinity,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Container(
+                          color: Colors.white,
+                          height: 14,
+                          width: 120,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        height: 14,
+                        width: 60,
+                      ),
+                      const SizedBox(width: 20),
+                      Container(
+                        color: Colors.white,
+                        height: 14,
+                        width: 60,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -77,7 +161,7 @@ class QuoteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height / 2.7,
       width: double.infinity,
       decoration: BoxDecoration(
           color: AppColors.extraWhite,
@@ -89,7 +173,7 @@ class QuoteWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 220,
+            height: 215,
             width: double.infinity,
             decoration: const BoxDecoration(
               color: AppColors.primaryColor,
@@ -104,17 +188,16 @@ class QuoteWidget extends StatelessWidget {
                   child: Text(
                     quote.quote ?? "",
                     style:
-                        CustomTextStyles.f14W400(color: AppColors.extraWhite),
+                        CustomTextStyles.f12W400(color: AppColors.extraWhite),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                // const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 20, right: 20, top: 12, bottom: 18),
                   child: Center(
                       child: Text("— ${quote.author}",
-                          style: CustomTextStyles.f14W600(
+                          style: CustomTextStyles.f12W600(
                               color: AppColors.extraWhite))),
                 )
               ],
@@ -139,12 +222,12 @@ class QuoteWidget extends StatelessWidget {
                       const Icon(
                         Icons.copy,
                         color: AppColors.secondaryColor,
-                        size: 23,
+                        size: 20,
                       ),
                       const SizedBox(width: 5),
                       Text(
                         'Copy',
-                        style: CustomTextStyles.f14W600(
+                        style: CustomTextStyles.f12W600(
                             color: AppColors.primaryColor),
                       ),
                     ],
@@ -160,12 +243,12 @@ class QuoteWidget extends StatelessWidget {
                       const Icon(
                         Icons.share,
                         color: AppColors.secondaryColor,
-                        size: 23,
+                        size: 20,
                       ),
                       const SizedBox(width: 5),
                       Text(
                         'Share',
-                        style: CustomTextStyles.f14W600(
+                        style: CustomTextStyles.f12W600(
                             color: AppColors.primaryColor),
                       ),
                     ],

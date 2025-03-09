@@ -14,7 +14,7 @@ class CustomElevatedButton extends StatelessWidget {
       {super.key,
       required this.title,
       required this.onTap,
-      this.height = 57,
+      this.height = 50,
       this.isDisabled = false,
       this.backGroundColor,
       this.textColor});

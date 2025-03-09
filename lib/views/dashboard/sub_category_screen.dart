@@ -23,7 +23,11 @@ class RomanticStatusScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Sub Categories", style: CustomTextStyles.f16W600()),
+        leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(Icons.arrow_back, color: AppColors.textColor)),
+        title: Text("Sub Categories",
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
       body: Column(
         children: [
@@ -35,8 +39,8 @@ class RomanticStatusScreen extends StatelessWidget {
                   showCategoryBottomSheet(context, "love");
                 },
                 child: Container(
-                  height: 150,
-                  width: Get.width / 2.26,
+                  height: 125,
+                  width: MediaQuery.of(context).size.width / 2.3,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
@@ -68,8 +72,8 @@ class RomanticStatusScreen extends StatelessWidget {
                   showCategoryBottomSheet(context, "marriage");
                 },
                 child: Container(
-                  height: 150,
-                  width: Get.width / 2.26,
+                  height: 125,
+                  width: MediaQuery.of(context).size.width / 2.3,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
@@ -105,8 +109,8 @@ class RomanticStatusScreen extends StatelessWidget {
                   showCategoryBottomSheet(context, "dating");
                 },
                 child: Container(
-                  height: 150,
-                  width: Get.width / 2.26,
+                  height: 125,
+                  width: MediaQuery.of(context).size.width / 2.3,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
@@ -117,8 +121,7 @@ class RomanticStatusScreen extends StatelessWidget {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: AppColors.textColor.withOpacity(
-                              0.33), // Adjust the opacity to make the image darker
+                          color: AppColors.textColor.withOpacity(0.33),
                         ),
                       ),
                       Center(
@@ -159,7 +162,11 @@ class EducationStatusScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Sub Categories", style: CustomTextStyles.f16W600()),
+        leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(Icons.arrow_back, color: AppColors.textColor)),
+        title: Text("Sub Categories",
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
       body: Column(
         children: [
@@ -171,8 +178,8 @@ class EducationStatusScreen extends StatelessWidget {
                   showCategoryBottomSheet(context, "graduation");
                 },
                 child: Container(
-                  height: 150,
-                  width: Get.width / 2.26,
+                  height: 125,
+                  width: MediaQuery.of(context).size.width / 2.3,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
@@ -204,8 +211,8 @@ class EducationStatusScreen extends StatelessWidget {
                   showCategoryBottomSheet(context, "knowledge");
                 },
                 child: Container(
-                  height: 150,
-                  width: Get.width / 2.26,
+                  height: 125,
+                  width: MediaQuery.of(context).size.width / 2.3,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
@@ -241,8 +248,8 @@ class EducationStatusScreen extends StatelessWidget {
                   showCategoryBottomSheet(context, "learning");
                 },
                 child: Container(
-                  height: 150,
-                  width: Get.width / 2.26,
+                  height: 125,
+                  width: MediaQuery.of(context).size.width / 2.3,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
@@ -274,8 +281,8 @@ class EducationStatusScreen extends StatelessWidget {
                   showCategoryBottomSheet(context, "medical");
                 },
                 child: Container(
-                  height: 150,
-                  width: Get.width / 2.26,
+                  height: 125,
+                  width: MediaQuery.of(context).size.width / 2.3,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(

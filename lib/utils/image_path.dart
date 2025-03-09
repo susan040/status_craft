@@ -9,6 +9,7 @@ class ImagePath {
   static const String easyAccess = "$baseCommonImagePath/access.gif";
   static const String homePageLogo = "$baseCommonImagePath/home_logo.svg";
   static const String romanticStatus = "$baseCommonImagePath/romantic_status.jpg";
+  
 
 
   static const String homeIcon = "$baseIconPath/home.svg";

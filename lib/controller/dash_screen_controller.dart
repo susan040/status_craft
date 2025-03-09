@@ -9,7 +9,7 @@ class DashScreenController extends GetxController {
   RxList<Widget> pages = RxList([
     //HomeScreen(),
     PromptScreen(),
-    const SettingScreen()
+     SettingScreen()
   ]);
   RxInt currentIndex = RxInt(0);
 

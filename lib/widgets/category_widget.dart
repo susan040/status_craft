@@ -14,8 +14,8 @@ class PositiveStatusScreen extends StatelessWidget {
         showCategoryBottomSheet(context, category);
       },
       child: Container(
-        height: 150,
-        width: Get.width / 2.26,
+        height: 125,
+        width: MediaQuery.of(context).size.width / 2.3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -23,21 +23,11 @@ class PositiveStatusScreen extends StatelessWidget {
             image: AssetImage(imagePath),
           ),
         ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.textColor.withOpacity(0.33),
-              ),
-            ),
-            Center(
-              child: Text(
-                category.capitalizeFirst!,
-                style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
-              ),
-            ),
-          ],
+        child: Center(
+          child: Text(
+            category.capitalizeFirst!,
+            style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
+          ),
         ),
       ),
     );
@@ -60,7 +50,11 @@ class PositiveStatusScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Sub Categories", style: CustomTextStyles.f16W600()),
+        leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(Icons.arrow_back, color: AppColors.textColor)),
+        title: Text("Sub Categories",
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
       body: Column(
         children: [
@@ -115,8 +109,8 @@ class EmotionalStatusScreen extends StatelessWidget {
         showCategoryBottomSheet(context, category);
       },
       child: Container(
-        height: 150,
-        width: Get.width / 2.26,
+        height: 125,
+        width: MediaQuery.of(context).size.width / 2.3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -124,21 +118,11 @@ class EmotionalStatusScreen extends StatelessWidget {
             image: AssetImage(imagePath),
           ),
         ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.textColor.withOpacity(0.33),
-              ),
-            ),
-            Center(
-              child: Text(
-                category.capitalizeFirst!,
-                style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
-              ),
-            ),
-          ],
+        child: Center(
+          child: Text(
+            category.capitalizeFirst!,
+            style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
+          ),
         ),
       ),
     );
@@ -161,7 +145,11 @@ class EmotionalStatusScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Sub Categories", style: CustomTextStyles.f16W600()),
+        leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(Icons.arrow_back, color: AppColors.textColor)),
+        title: Text("Sub Categories",
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
       body: Column(
         children: [
@@ -219,8 +207,8 @@ class CelebrationStatusScreen extends StatelessWidget {
         showCategoryBottomSheet(context, category);
       },
       child: Container(
-        height: 150,
-        width: Get.width / 2.26,
+        height: 125,
+        width: MediaQuery.of(context).size.width / 2.3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -228,21 +216,11 @@ class CelebrationStatusScreen extends StatelessWidget {
             image: AssetImage(imagePath),
           ),
         ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.textColor.withOpacity(0.33),
-              ),
-            ),
-            Center(
-              child: Text(
-                category.capitalizeFirst!,
-                style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
-              ),
-            ),
-          ],
+        child: Center(
+          child: Text(
+            category.capitalizeFirst!,
+            style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
+          ),
         ),
       ),
     );
@@ -256,7 +234,11 @@ class CelebrationStatusScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Sub Categories", style: CustomTextStyles.f16W600()),
+        leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(Icons.arrow_back, color: AppColors.textColor)),
+        title: Text("Sub Categories",
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
       body: Column(
         children: [
@@ -307,8 +289,8 @@ class InspirationStatusScreen extends StatelessWidget {
         showCategoryBottomSheet(context, category);
       },
       child: Container(
-        height: 150,
-        width: Get.width / 2.26,
+        height: 125,
+        width: MediaQuery.of(context).size.width / 2.3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -316,21 +298,11 @@ class InspirationStatusScreen extends StatelessWidget {
             image: AssetImage(imagePath),
           ),
         ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.textColor.withOpacity(0.33),
-              ),
-            ),
-            Center(
-              child: Text(
-                category.capitalizeFirst!,
-                style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
-              ),
-            ),
-          ],
+        child: Center(
+          child: Text(
+            category.capitalizeFirst!,
+            style: CustomTextStyles.f14W700(color: AppColors.extraWhite),
+          ),
         ),
       ),
     );
@@ -344,7 +316,11 @@ class InspirationStatusScreen extends StatelessWidget {
         backgroundColor: AppColors.extraWhite,
         centerTitle: false,
         elevation: 2,
-        title: Text("Sub Categories", style: CustomTextStyles.f16W600()),
+        leading: InkWell(
+            onTap: () => Get.back(),
+            child: Icon(Icons.arrow_back, color: AppColors.textColor)),
+        title: Text("Sub Categories",
+            style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
       body: Column(
         children: [
