@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:status_craft/utils/colors.dart';
+import 'package:status_craft/utils/custom_snackbar.dart';
 import 'package:status_craft/utils/custom_text_style.dart';
 import 'package:status_craft/widgets/custom/elevated_button.dart';
 
@@ -40,7 +41,6 @@ class PromptScreenController extends GetxController {
                         color: AppColors.secondaryTextColor)),
               ),
 
-              // Rating Bar
               Center(
                 child: RatingBar.builder(
                   unratedColor: AppColors.lGrey.withOpacity(0.4),
@@ -56,13 +56,11 @@ class PromptScreenController extends GetxController {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {
-                    print(
-                        "Rating: $rating"); // You can log or store the rating value
+                    print("Rating: $rating");
                   },
                 ),
               ),
 
-              // Comment Section
               Padding(
                 padding: const EdgeInsets.only(
                     left: 16, right: 16, top: 12, bottom: 10),
@@ -87,8 +85,6 @@ class PromptScreenController extends GetxController {
                   ),
                 ),
               ),
-
-              // Submit Button
               Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
                 child: SizedBox(
@@ -97,6 +93,10 @@ class PromptScreenController extends GetxController {
                       title: "Submit Review",
                       onTap: () {
                         Navigator.pop(context);
+                        CustomSnackBar.success(
+                          title: "Review",
+                          message: "Review submitted successfully!",
+                        );
                       }),
                 ),
               )

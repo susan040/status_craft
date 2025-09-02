@@ -48,13 +48,13 @@ class CategoryBottomSheet extends StatelessWidget {
                 }).toList(),
               )),
           const SizedBox(height: 22),
-          CustomElevatedButton(
-              title: "Show Quotes",
-              onTap: () {
-                Navigator.of(context).pop();
-                Get.to(() => QuotesDisplayPage(
-                    category: category, count: selectedCount.value));
-              })
+          // CustomElevatedButton(
+          //     title: "Show Quotes",
+          //     onTap: () {
+          //       Navigator.of(context).pop();
+          //       Get.to(() => QuotesDisplayPage(
+          //           category: category, count: selectedCount.value));
+          //     })
         ],
       ),
     );

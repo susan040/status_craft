@@ -1,36 +1,119 @@
+import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:status_craft/models/quote.dart';
 import 'dart:convert';
+import 'package:status_craft/models/tags.dart';
+import 'package:status_craft/utils/api.dart';
 
 class QuoteController extends GetxController {
-  var quotes = <Quotes>[].obs;
-  var isLoading = true.obs;
+  var isLoading = false.obs;
+  var isMoreLoading = false.obs;
+  RxList<Results> quotesList = <Results>[].obs;
 
-  void clearQuotes() {
-    quotes.clear();
+  int currentPage = 1;
+  int totalPages = 1;
+  final int limit = 10;
+
+  Future<void> fetchQuotesByTag(String tag, {bool refresh = false}) async {
+    try {
+      if (refresh) {
+        currentPage = 1;
+        totalPages = 1;
+        quotesList.clear();
+      }
+
+      if (currentPage > totalPages) return;
+
+      if (refresh) {
+        isLoading.value = true;
+      } else {
+        isMoreLoading.value = true;
+      }
+
+      final url =
+          'https://api.quotable.io/quotes?tags=$tag&page=$currentPage&limit=$limit';
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final data = Quotes.fromJson(jsonDecode(response.body));
+
+        if (refresh) {
+          quotesList.assignAll(data.results ?? []);
+        } else {
+          quotesList.addAll(data.results ?? []);
+        }
+
+        totalPages = data.totalPages ?? 1;
+        currentPage++;
+      } else {
+        print("Failed to load quotes: ${response.body}");
+      }
+    } catch (e) {
+      print("Error fetching quotes: $e");
+    } finally {
+      isLoading.value = false;
+      isMoreLoading.value = false;
+    }
   }
+  // var isLoading = false.obs;
+  // RxList<Results> quotesList = <Results>[].obs;
+
+  // int currentPage = 1;
+  // int totalPages = 1;
+  // final int limit = 8;
+
+  // Future<void> fetchQuotesByTag(String tag, {int page = 1}) async {
+  //   try {
+  //     isLoading.value = true;
+  //     currentPage = page;
+
+  //     final url =
+  //         'https://api.quotable.io/quotes?tags=$tag&page=$page&limit=$limit';
+  //     final response = await http.get(Uri.parse(url));
+
+  //     if (response.statusCode == 200) {
+  //       final data = Quotes.fromJson(jsonDecode(response.body));
+  //       quotesList.assignAll(data.results ?? []);
+  //       totalPages = data.totalPages ?? 1;
+  //     } else {
+  //       quotesList.clear();
+  //     }
+  //   } catch (e) {
+  //     print("Error fetching quotes: $e");
+  //     quotesList.clear();
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
 
   Future<void> fetchQuote(String category, int count) async {
-    final url =
-        'https://api.api-ninjas.com/v1/quotes?category=$category&limit=$count';
-    final headers = {'X-Api-Key': 'iiDChh7p8mo3Th8SxFB0Tw==EEWwjbfFq8Yi9vJh'};
-
     try {
-      isLoading(true);
-      final response = await http.get(Uri.parse(url), headers: headers);
+      isLoading.value = true;
+
+      final response = await http.get(Uri.parse(Api.getRandomQuoteUrl));
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
+
         if (jsonData is List && jsonData.isNotEmpty) {
-          quotes.value =
-              jsonData.map((quoteJson) => Quotes.fromJson(quoteJson)).toList();
+          List<Results> results = jsonData
+              .map((item) => Results.fromJson(item as Map<String, dynamic>))
+              .where((quote) {
+            final tags = quote.tags ?? [];
+            return tags.length == 1 && // only single tag
+                !tags.any((tag) =>
+                    tag.trim().toLowerCase() ==
+                    'famous quotes'); // exclude Famous Quotes
+          }).toList();
+
+          quotesList.value = results.take(count).toList();
         } else {
-          quotes.value = [
-            Quotes(
-                quote: 'No quote available',
-                author: 'Unknown',
-                category: category)
+          quotesList.value = [
+            Results(
+              content: 'No quote available',
+              author: 'Unknown',
+            )
           ];
         }
       } else {
@@ -38,52 +121,113 @@ class QuoteController extends GetxController {
       }
     } catch (e) {
       print('Exception: $e');
-      quotes.value = [
-        Quotes(
-            quote: 'Error fetching quotes',
-            author: 'Unknown',
-            category: category)
+      quotesList.value = [
+        Results(
+          content: 'Error fetching quotes',
+          author: 'Unknown',
+        )
       ];
     } finally {
-      isLoading(false);
+      isLoading.value = false;
     }
   }
 
   Future<List<Quotes>> fetchQuotes() async {
-    const url = 'https://api.api-ninjas.com/v1/quotes';
-    final headers = {
-      'X-Api-Key': 'iiDChh7p8mo3Th8SxFB0Tw==EEWwjbfFq8Yi9vJh',
-    };
+    const url = Api.getRandomQuoteUrl;
 
-    // Perform multiple API calls in parallel
     final responses = await Future.wait([
-      _fetchQuoteFromApi(url, headers), // First API call
-      _fetchQuoteFromApi(url, headers), // Second API call
-      _fetchQuoteFromApi(url, headers), // Third API call
+      _fetchQuoteFromApi(url),
+      _fetchQuoteFromApi(url),
+      _fetchQuoteFromApi(url),
+      _fetchQuoteFromApi(url),
     ]);
 
-    // Combine the results of all 3 API calls
     List<Quotes> allQuotes = [];
-    for (var response in responses) {
-      allQuotes.addAll(response); // Add quotes from each response to the list
+    for (var quotes in responses) {
+      allQuotes.addAll(quotes);
     }
 
-    return allQuotes
-        .take(3)
-        .toList(); // You can limit the results to 3 quotes if needed
+    return allQuotes.take(3).toList();
   }
 
-// Helper function to fetch quotes from the API
   Future<List<Quotes>> _fetchQuoteFromApi(
-      String url, Map<String, String> headers) async {
-    final response = await http.get(Uri.parse(url), headers: headers);
+    String url,
+  ) async {
+    final response = await http.get(
+      Uri.parse(url),
+    );
 
     if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return quotesFromJson(
-          data); // Converts the response JSON to list of Quotes
+      final List<dynamic> data = json.decode(response.body);
+
+      List<Quotes> quotesList = data.map((item) {
+        return Quotes(
+            results: [Results.fromJson(item as Map<String, dynamic>)]);
+      }).toList();
+
+      return quotesList;
     } else {
       throw Exception('Failed to load quotes');
     }
   }
+
+  RxList<Tags> categories = <Tags>[].obs;
+
+  @override
+  void onInit() {
+    fetchCategories();
+    super.onInit();
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      isLoading.value = true;
+
+      var response = await http.get(Uri.parse(Api.getTagsUrl));
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body) as List;
+
+        categories.value = data
+            .map((e) => Tags.fromJson(e))
+            .where((tag) => tag.slug?.toLowerCase() != "famous-quotes")
+            .toList();
+      } else {
+        log("Failed to load categories", name: "API Error");
+      }
+    } catch (e) {
+      log("$e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  final Map<String, String> categoryImages = {
+    "business": "assets/common/business.jpg",
+    "change": "assets/common/change.jpg",
+    "education": "assets/common/education.jpg",
+    "friendship": "assets/common/friendship.jpg",
+    "happiness": "assets/common/happiness.jpg",
+    "inspirational": "assets/common/inspirations.jpg",
+    "love": "assets/common/love.jpg",
+    "famous quotes": "assets/common/famous_quotes.jpg",
+    "wisdom": "assets/common/wisdom.jpg",
+    "famous-quotes": "assets/common/famous_quotes.jpg",
+
+    ///sssssssssdftgyhujiko
+    // "age": "assets/common/age.jpg",
+    // "character": "assets/common/character.jpg",
+    // "competition": "assets/common/competition.jpg",
+    // "courage": "assets/common/courage.jpg",
+    // "creativity": "assets/common/creativity.jpg",
+    // "failure": "assets/common/failure.jpg",
+    // "faith": "assets/common/faith.jpg",
+    // "family": "assets/common/family.jpg",
+    // "future": "assets/common/future.jpg",
+    // "health": "assets/common/health.jpg",
+    // "history": "assets/common/history.jpg",
+    // "life": "assets/common/life.jpg",
+    // "motivational": "assets/common/motivational.jpg",
+    // "nature": "assets/common/nature.jpg",
+  };
 }

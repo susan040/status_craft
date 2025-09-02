@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:status_craft/views/dashboard/easy_search_screen.dart';
+import 'package:status_craft/views/dashboard/onboading_screen.dart';
 
 class SplashScreenController extends GetxController {
   @override
   void onInit() {
     Future.delayed(const Duration(seconds: 3), () {
-      Get.offAll(() => const EasyToSearchScreen());
+      Get.offAll(() => OnboardingScreen());
     });
     super.onInit();
   }
