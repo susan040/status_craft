@@ -120,46 +120,48 @@ class HelpPage extends StatelessWidget {
         title: Text("Help",
             style: CustomTextStyles.f14W600(color: AppColors.textColor)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        child: ListView(
-          children: [
-            _sectionCard(
-              icon: Icons.info_outline,
-              title: 'Introduction',
-              content: Text(
-                'Welcome to Status Generator! This app helps you create and share inspiring quotes and statuses. Whether you want to express love, share wisdom, or celebrate achievements, you will find the perfect quote here.',
-                style: CustomTextStyles.f13W400(height: 1.6),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            _sectionCard(
-              icon: Icons.touch_app,
-              title: 'How to Use',
-              content: Text(
-                '• Browse categories to find quotes.\n'
-                '• Select a category to view quotes.\n'
-                '• Use the refresh button to get new quotes.\n'
-                '• Share your favorite quotes with friends.',
-                style: CustomTextStyles.f13W400(
-                  height: 1.8,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: ListView(
+            children: [
+              _sectionCard(
+                icon: Icons.info_outline,
+                title: 'Introduction',
+                content: Text(
+                  'Welcome to Status Generator! This app helps you create and share inspiring quotes and statuses. Whether you want to express love, share wisdom, or celebrate achievements, you will find the perfect quote here.',
+                  style: CustomTextStyles.f13W400(height: 1.6),
+                  textAlign: TextAlign.justify,
                 ),
-                textAlign: TextAlign.justify,
               ),
-            ),
-            _faqSection(),
-            _sectionCard(
-              icon: Icons.support_agent,
-              title: 'Contact Support',
-              content: Text(
-                'If you have any questions or need assistance, please contact our support team.',
-                style: CustomTextStyles.f13W400(
-                  height: 1.6,
+              _sectionCard(
+                icon: Icons.touch_app,
+                title: 'How to Use',
+                content: Text(
+                  '• Browse categories to find quotes.\n'
+                  '• Select a category to view quotes.\n'
+                  '• Use the refresh button to get new quotes.\n'
+                  '• Share your favorite quotes with friends.',
+                  style: CustomTextStyles.f13W400(
+                    height: 1.8,
+                  ),
+                  textAlign: TextAlign.justify,
                 ),
-                textAlign: TextAlign.justify,
               ),
-            ),
-          ],
+              _faqSection(),
+              _sectionCard(
+                icon: Icons.support_agent,
+                title: 'Contact Support',
+                content: Text(
+                  'If you have any questions or need assistance, please contact our support team.',
+                  style: CustomTextStyles.f13W400(
+                    height: 1.6,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

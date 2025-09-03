@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:status_craft/utils/colors.dart';
 import 'package:status_craft/utils/custom_text_style.dart';
-import 'package:status_craft/views/dashboard/quote_page.dart';
-import 'package:status_craft/widgets/custom/elevated_button.dart';
 
 class CategoryBottomSheet extends StatelessWidget {
   final String category;

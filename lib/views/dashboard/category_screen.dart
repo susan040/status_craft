@@ -25,22 +25,22 @@ class CategoryScreen extends StatelessWidget {
           style: CustomTextStyles.f14W600(color: AppColors.textColor),
         ),
       ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
+      body: SafeArea(
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-        if (controller.categories.isEmpty) {
-          return const Center(child: Text("No categories found"));
-        }
+          if (controller.categories.isEmpty) {
+            return const Center(child: Text("No categories found"));
+          }
 
-        return Padding(
-          padding:
-              const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 14),
-          child: GridView.builder(
+          return GridView.builder(
             itemCount: controller.categories
                 .where((c) => (c.quoteCount ?? 0) >= 5)
                 .length,
+            padding:
+                const EdgeInsets.only(top: 14, bottom: 14, left: 14, right: 14),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 12,
@@ -58,7 +58,7 @@ class CategoryScreen extends StatelessWidget {
               // Get mapped image or fallback
               final imagePath = controller
                       .categoryImages[category.slug?.toLowerCase() ?? ""] ??
-                  "assets/common/category_placeholder.jpg";
+                  "assets/common/no_image.png";
 
               return GestureDetector(
                 onTap: () {
@@ -66,7 +66,6 @@ class CategoryScreen extends StatelessWidget {
                 },
                 child: Stack(
                   children: [
-                    // Background image
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
@@ -83,8 +82,6 @@ class CategoryScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-
-                    // Overlay gradient
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
@@ -98,8 +95,6 @@ class CategoryScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    // Category title & quote count
                     Positioned(
                       bottom: 12,
                       left: 12,
@@ -127,9 +122,9 @@ class CategoryScreen extends StatelessWidget {
                 ),
               );
             },
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 }
